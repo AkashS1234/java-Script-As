@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">    
+        body{    
+            margin: 0;
+            padding-bottom: 20px;
+            font-family: 'Nunito', sans-serif;
+            color: white;
+            background-image: linear-gradient(270deg, #08AEEA 0%, #2AF598 100%); 
+        }    
+        input[type="text"] {    
+            width: 250px;    
+        }    
+        input[type="submit"], input[type="reset"] {    
+            width: 77px;    
+            height: 27px;    
+            position: relative;left: 180px;    
+        }    
+        form{    
+            background-color: #202124;
+    position: relative;
+    width:500px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; 
+        }    
+        td {    
+            padding: 10px;    
+        }    
+        td:first-child {    
+            text-align: right;    
+            font-weight: bold;    
+        }    
+        td:last-child {    
+            text-align: left;    
+        }
+        .credit a{
+            text-decoration: none;
+            color:#000;
+            font-weight: bold;
+        }
+        .credit{
+            text-align: center;
+            color: #000;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    
+    </style>    
+    
+
+  <script>
+    
+ 
+
+function validateUserName() {
+            let userCtrl = document.getElementById("userName");
+            if (userCtrl.value == "") {
+                document.getElementById("userError1").innerHTML = "User Name is mandatory";
+                userCtrl.focus();
+            }
+            else if(userCtrl.value.length > 15){
+                // alert("characters must not exceed 15");
+                document.getElementById("userError1").innerHTML = "Username should not exceed 15 characters";
+                userCtrl.focus();
+                }
+            else if(userCtrl.value.length < 6){
+                //alert("enter more than 6 characters");
+                document.getElementById("userError1").innerHTML = "Minimum 6  characters required";
+                userCtrl.focus();
+
+                }
+            else if(userCtrl.value[0] != userCtrl.value[0].toUpperCase()){
+                //alert("First letter should be capital");
+                document.getElementById("userError1").innerHTML = "First letter should be capital";
+                userCtrl.focus();
+                }
+            else {
+                document.getElementById("userError1").innerHTML = "";
+            }
+        }
+
+function validatePassword() {
+             passCtrl = document.getElementById("password");
+            if (passCtrl.value == "") {
+                document.getElementById("pwd1").innerHTML = "Password is mandatory";
+                passCtrl.focus();
+            }
+            else if(passCtrl.value.length < 8) {  
+            document.getElementById("pwd1").innerHTML = "Minimum 8 characters required";  
+            passCtrl.focus(); 
+            }
+            else if(passCtrl.value.length > 15) {  
+            document.getElementById("pwd1").innerHTML = "Password should not exceed 15 characters";  
+            passCtrl.focus();
+            } 
+
+             
+            else 
+                if(passCtrl.value.match(/[a-z]/g) && passCtrl.value.match(
+                    /[A-Z]/g) && passCtrl.value.match(
+                    /[0-9]/g) && passCtrl.value.match(
+                    /[^a-zA-Z\d]/g) ){
+                        document.getElementById("pwd1").innerHTML = ""; 
+                     }
+     
+                else  
+                {
+                document.getElementById("pwd1").innerHTML = "At least 1 uppercase character | lowercase character | digit | special character";  
+                passCtrl.focus();    
+                }
+        }
+
+function ValidateEmail() {
+
+var validRegex = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
+var em = document.getElementById("email");
+if(em.value == ""){
+    document.getElementById("em1").innerHTML="e-mail id is mandatory"
+    em.focus();
+}
+
+else if (em.value.match(validRegex))
+ {
+    
+    document.getElementById("em1").innerHTML = "";
+     
+ } 
+else 
+ {
+    document.getElementById("em1").innerHTML = "invalid e-mail address";
+    em.focus();
+ }
+
+}
+  
+function validatePhoneNumber(){
+    var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    var phnum = document.getElementById("phone");
+    if(phnum.value == ""){
+        document.getElementById("phoneError").innerHTML = "enter phone number"; 
+        phnum.focus();
+    }
+    else if(phnum.value.match(re)){
+        document.getElementById("phoneError").innerHTML = ""; 
+    }
+    else{
+        document.getElementById("phoneError").innerHTML = "enter valid phone number";
+        phnum.focus();
+    }
+
+}
+  
+function validateConfirmPassword(){
+var conf = document.getElementById("confirm");
+if (conf.value == passCtrl.value){
+    document.getElementById("confError").innerHTML="";
+}
+else{
+    document.getElementById("confError").innerHTML="password does not match";
+    conf.focus();
+}
+}
+  
+function validateCheckbox(){
+    var check = document.getElementById("terms");
+    if (check.checked == false){
+        
+        alert("cannot enter");
+        document.getElementById("checkError").innerHTML="can't enter";
+         
+        
+    }
+    else{
+        document.getElementById("checkError").innerHTML="";
+    }
+}
+
+
+  </script>
+
+
+</head>
+
+<body>
+    <center>
+    <div>
+    
+    <form name="myform" action="action_page.php"  onsubmit="validateCheckbox()"  method="post">
+  
+    <h1 style="color:rgb(150, 135, 235) ;"><b>SIGN UP</b></h1>
+    <p>Registration Form</p>
+    <hr>
+
+<table>
+    <tr>
+        <td><label for="name" ><b>Username:</b></label></td>
+        <td> <input type="text" id="userName" placeholder="Username" onblur="validateUserName()"></td>
+        <td><span id = "userError1" ></span></td>
+    </tr>
+   
+    <tr>
+        <td><label for="email"><b>Email:</b></label></td>
+        <td> <input type="email" placeholder="Enter Email" id="email" onblur="ValidateEmail()"></td>
+        <td><span id="em1"></span></td>
+    </tr>
+    
+    <tr>
+        <td><label for="phnum"><b>Phone number:</b></label></td>
+        <td><input type="text" id="phone" placeholder="phone number" onblur="validatePhoneNumber()" maxlength="10"></td>
+        <td><span id="phoneError"></span></td>
+    </tr>
+
+    <tr>
+        <td><label for="gender"><b>Gender:</b></label></td>
+        <td> 
+            <select name="gender">
+	        <option value="male">Male</option>
+	        <option value="female">Female</option>
+	        <option value="other">others</option>
+        </td>
+            </td>
+    </tr>
+    
+    
+    <tr>
+        <td><label for="pwd" ><b>Password:</b></label></td>
+        <td><input type="password"  id="password" placeholder="Enter Password"  onblur="validatePassword()"></td>
+        <td><span id = "pwd1" ></span> </td>     
+        <td><span id="pwd2" style="color: rgb(49, 78, 6)"></span></td>  </tr>
+    
+    <tr>
+        <td><label for="psw-repeat"><b>Confirm Password:</b></label></td>
+        <td><input type="password" id="confirm" placeholder="Confirm Password" onblur="validateConfirmPassword()" name="psw-repeat" ></td>
+        <td><span id="confError"></span></td>
+    </tr>
+    <tr>
+        <td><label for="dob"><b>DOB:</b></label></td>
+        <td><input type="date" name="dob"  ></td>
+    </tr>
+    <tr>
+        <td><label for="Language"><b>Language</b></label></td>
+        <td>
+          <select name="language" id="language">
+            <option value="">Select language</option>
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Russian">Russian</option>
+          </select>
+        </td>
+      </tr>
+    
+    
+    <tr>
+        <td>
+            <label for="state"><b>State</b></label>
+        </td>
+        <td>
+            <select name="State" id="state">
+                <option value="">Select state</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Punjab">Pujab</option> 
+        </td>
+    </tr>
+    
+<tr>
+      
+   <td> <button type="submit">Sign Up</button>
+        <button type="button">Cancel</button>
+   </td>
+
+</tr>
+<tr>
+    <td><p>Already have an account? <a href=js27.html> Login</a></p></td>
+</tr>
+<tr>
+    <td>
+        <span id="checkError"></span>
+    </td>
+</tr>
+</table>
+</form>
+</div>
+</center>
+</form>
+<div class="credit" >Made with <span style:"color:tomato">❤</span> by Akash</a></div> 
+</body>
+</html>
